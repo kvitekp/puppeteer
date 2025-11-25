@@ -2753,4 +2753,25 @@ describe('Page', function () {
       await page2.close();
     });
   });
+
+  describe('Page.resize', function () {
+    it('should resize the browser window to fit page content', async () => {
+      const {browser, context} = await getTestState();
+
+      const page = await context.newPage({
+        type: 'window',
+        windowBounds: {left: 0, top: 0, width: 800, height: 600},
+      });
+
+      const contentWidth = 1600;
+      const contentHeight = 1200;
+      await page.resize({contentWidth, contentHeight});
+
+      const windowId = await page.windowId();
+      const bounds = await browser.getWindowBounds(windowId);
+
+      expect(bounds.width).toBeGreaterThanOrEqual(contentWidth);
+      expect(bounds.height).toBeGreaterThanOrEqual(contentHeight);
+    });
+  });
 });
