@@ -8,6 +8,7 @@ import type Protocol from 'devtools-protocol';
 import * as Bidi from 'webdriver-bidi-protocol';
 
 import {firstValueFrom, from, raceWith} from '../../third_party/rxjs/rxjs.js';
+import type {WindowId} from '../api/Browser.js';
 import type {CDPSession} from '../api/CDPSession.js';
 import type {BoundingBox} from '../api/ElementHandle.js';
 import type {WaitForOptions} from '../api/Frame.js';
@@ -262,6 +263,10 @@ export class BidiPage extends Page {
     contentWidth: number;
     contentHeight: number;
   }): Promise<void> {
+    throw new Error('Method not implemented for WebDriver BiDi yet.');
+  }
+
+  override windowId(): Promise<WindowId> {
     throw new Error('Method not implemented for WebDriver BiDi yet.');
   }
 
